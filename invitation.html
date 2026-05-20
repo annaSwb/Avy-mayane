@@ -33,10 +33,8 @@
             line-height: 1.6;
         }
 
-        /* SPLASH — supprimé, logo affiché dans la carte */
         #splash { display: none; }
 
-        /* NAV */
         nav {
             position: sticky; top: 0; width: 100%; z-index: 1000;
             background: rgba(253,251,255,0.97);
@@ -54,7 +52,6 @@
             font-weight: 600;
         }
 
-        /* WRAPPER */
         .main-wrapper {
             max-width: 520px;
             margin: 0 auto;
@@ -62,7 +59,6 @@
             display: flex; flex-direction: column; gap: 0;
         }
 
-        /* CARD BASE */
         .card {
             position: relative;
             background: #fff;
@@ -78,7 +74,7 @@
         }
         .card.active { opacity: 1; transform: translateY(0); }
 
-        /* MAIRIE — fleurs bordure latérale */
+        /* MAIRIE */
         #mairie { padding: 60px 80px; }
         .fleur-gauche {
             position: absolute; top: 0; left: 0;
@@ -99,18 +95,8 @@
             pointer-events: none;
         }
 
-        /* Monogramme */
-        .monogram {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
-            color: var(--purple-main);
-            margin-bottom: 10px;
-        }
-
-        /* Anneaux */
         .rings-svg { margin: 0 auto 16px; display: block; }
 
-        /* Titres section */
         .section-title {
             font-family: 'Cinzel', serif;
             font-size: 0.7rem;
@@ -120,7 +106,6 @@
             margin-bottom: 6px;
         }
 
-        /* Séparateur */
         .ornament {
             display: flex; align-items: center; justify-content: center;
             gap: 8px; margin: 14px auto;
@@ -128,7 +113,6 @@
         .ornament-line { width: 35px; height: 1px; background: var(--purple-soft); }
         .ornament-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--purple-soft); }
 
-        /* Noms */
         .couple-names {
             font-family: 'Great Vibes', cursive;
             color: var(--purple-main);
@@ -146,7 +130,6 @@
             margin-bottom: 10px;
         }
 
-        /* Date / heure / lieu */
         .date-main {
             font-family: 'Cinzel', serif;
             font-size: clamp(1.1rem, 5vw, 1.45rem);
@@ -176,7 +159,6 @@
             margin-top: 2px;
         }
 
-        /* Boutons */
         .btn-row { display: flex; gap: 18px; justify-content: center; margin-top: 26px; flex-wrap: wrap; }
         .btn-link {
             display: inline-flex; align-items: center; gap: 5px;
@@ -187,29 +169,6 @@
             text-decoration: none;
             border: none; border-bottom: 1px solid var(--purple-light);
             padding-bottom: 3px; background: none; cursor: pointer;
-        }
-
-        /* FAMILLES */
-        #familles { padding: 45px 30px 40px; }
-        .kol-sason {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
-            color: var(--purple-light);
-            direction: rtl; margin-bottom: 28px;
-            font-style: italic; line-height: 1.9;
-        }
-        .families-grid {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 2px 16px; margin-bottom: 20px; text-align: left;
-        }
-        .families-grid span {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem; color: var(--text-mid); line-height: 1.75;
-        }
-        .families-joie {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic; font-size: 1rem;
-            color: var(--text-light); line-height: 1.6;
         }
 
         /* HOUPPA */
@@ -224,25 +183,32 @@
             position: absolute; width: 120px;
             pointer-events: none; z-index: 10;
         }
-        .flower-tr {
-            top: -35px; right: -35px;
-        }
-        .flower-bl {
-            bottom: -35px; left: -35px;
-        }
+        .flower-tr { top: -35px; right: -35px; }
+        .flower-bl { bottom: -35px; left: -35px; }
 
-        /* Texte hébreu courbé en arc SVG */
-        .kol-sason-arc {
-            width: 100%;
-            max-width: 340px;
-            margin: 0 auto 20px;
-            display: block;
+        /* Kol Sason — rendu en lignes simples, pas en arc pour eviter les bugs */
+        .kol-sason-block {
+            margin: 14px auto 28px;
+            text-align: center;
         }
-        .kol-sason-arc text {
+        .kol-sason-line {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 17px;
-            fill: var(--purple-main);
+            font-size: 1.25rem;
+            color: var(--purple-main);
             font-style: italic;
+            direction: rtl;
+            display: block;
+            line-height: 1.9;
+            letter-spacing: 1px;
+        }
+        .kol-sason-line-fr {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: italic;
+            display: block;
+            letter-spacing: 1px;
+            margin-top: 2px;
         }
 
         .hebrew-row {
@@ -257,13 +223,10 @@
         }
         .souvenir-text {
             font-family: 'Cormorant Garamond', serif;
-            font-style: italic; font-size: 0.93rem; color: var(--text-light);
-            margin-top: 22px; padding-top: 16px;
-        }
-        .amour-text {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.7rem;
-            color: var(--purple-main); margin-top: 14px;
+            font-style: italic; font-size: 0.9rem; color: var(--text-light);
+            margin-top: 26px; padding-top: 18px;
+            border-top: 1px solid var(--purple-pale);
+            line-height: 1.8;
         }
 
         /* RSVP */
@@ -331,21 +294,21 @@
 </head>
 <body>
 
-<div id="splash">
-    <img src="LIEN_LOGO" alt="Logo">
-</div>
+<div id="splash"></div>
 
 <!--
     ============================================================
-    LIENS À COMPLÉTER :
-    - Logo splash       : remplacer "LIEN_LOGO" ci-dessous
-    - Musique           : remplacer "LIEN_MUSIQUE"
-    - Fleur gauche (mairie, bordure gauche répétée) : "LIEN_FLEUR_GAUCHE"
-    - Fleur droite (mairie, bordure droite répétée) : "LIEN_FLEUR_DROITE"
-    - Fleur haut-droite (houppa coin haut droit)    : "LIEN_HAUT_DROITE"
-    - Fleur bas-gauche  (houppa coin bas gauche)    : "LIEN_BAS_GAUCHE"
+    LIENS A COMPLETER :
+    - logo.png          : logo affiché en haut de la carte mairie
+    - musique.mp3       : musique de fond
+    - fleur-gauche.png  : bordure gauche répétée (carte mairie)
+    - fleur-droite.png  : bordure droite répétée (carte mairie)
+    - haut-droite.png   : coin haut-droit fleuri (carte houppa)
+    - bas-gauche.png    : coin bas-gauche fleuri (carte houppa)
+    - LIEN_GOOGLE_SHEET_API : URL de ton Google Apps Script déployé
     ============================================================
 -->
+
 <audio id="bg-music" loop><source src="musique.mp3" type="audio/mpeg"></audio>
 <button id="music-toggle" class="music-btn" onclick="toggleMusic(event)">
     <i class="fa-solid fa-play"></i>
@@ -394,8 +357,8 @@
         <div class="venue-addr">3 rue de la Résistance, 95200 Sarcelles</div>
 
         <div class="btn-row">
-            <a href="https://waze.com/ul?q=3+rue+de+la+R%C3%A9sistance+95200+Sarcelles" target="_blank" class="btn-link">🚗 GPS Waze</a>
-            <button onclick="addToCalendar('mairie')" class="btn-link">📅 Bloquer la date</button>
+            <a href="https://waze.com/ul?q=3+rue+de+la+R%C3%A9sistance+95200+Sarcelles" target="_blank" class="btn-link">GPS Waze</a>
+            <button onclick="addToCalendar('mairie')" class="btn-link">Bloquer la date</button>
         </div>
     </div>
 
@@ -404,33 +367,27 @@
         <img src="haut-droite.png" alt="" class="flower-corner flower-tr">
         <img src="bas-gauche.png" alt="" class="flower-corner flower-bl">
 
-        <!-- Texte hébreu courbé en arc -->
-        <svg class="kol-sason-arc" viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <path id="arcPath" d="M 30,90 Q 170,10 310,90" />
-            </defs>
-            <text>
-                <textPath href="#arcPath" startOffset="50%" text-anchor="middle">
-                    קוֹל שָׂשׂוֹן וְקוֹל שִׂמְחָה, קוֹל חָתָן וְקוֹל כַּלָּה
-                </textPath>
-            </text>
-        </svg>
+        <!-- Kol Sason — texte hébreu sans nikoud pour rendu propre, avec traduction -->
+        <div class="kol-sason-block">
+            <span class="kol-sason-line">קול ששון וקול שמחה, קול חתן וקול כלה</span>
+            <span class="kol-sason-line-fr">Kol sason véqol simha, kol hatan véqol kalla</span>
+        </div>
 
         <!-- Familles -->
-     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;width:100%;">
-    <div style="flex:1;text-align:left;">
-        <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Charly et Solange SULTAN</span>
-        <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Pascal SULTAN</span>
-        <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Nathalie ZAGDOUN</span>
-    </div>
-    <div style="flex:1;text-align:right;">
-        <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Maguy SILLAM</span>
-        <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Patrick et Arielle MALKA</span>
-        <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">&nbsp;</span>
-    </div>
-</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;width:100%;">
+            <div style="flex:1;text-align:left;">
+                <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Charly et Solange SULTAN</span>
+                <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Pascal SULTAN</span>
+                <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Nathalie ZAGDOUN</span>
+            </div>
+            <div style="flex:1;text-align:right;">
+                <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Maguy SILLAM</span>
+                <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Patrick et Arielle MALKA</span>
+                <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">&nbsp;</span>
+            </div>
+        </div>
 
-        <div class="families-joie" style="margin-bottom:20px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--text-light);line-height:1.6;margin-bottom:20px;">
             Ont la joie de vous faire part du mariage de leurs petits-enfants et enfants
         </div>
 
@@ -460,14 +417,15 @@
         <div class="venue-name">La Vénerie — Domaine des Rois</div>
         <div class="venue-addr">RD213, 77830 Échouboulains</div>
 
-        <div class="souvenir-text">✦ Une pensée pour ceux qui auraient tant aimé être là ✦</div>
-
         <div class="btn-row">
-            <a href="https://waze.com/ul?q=LA+VENERIE+RD213+77830+Echouboulains" target="_blank" class="btn-link">🚗 GPS Waze</a>
-            <button onclick="addToCalendar('houppa')" class="btn-link">📅 Bloquer la date</button>
+            <a href="https://waze.com/ul?q=LA+VENERIE+RD213+77830+Echouboulains" target="_blank" class="btn-link">GPS Waze</a>
+            <button onclick="addToCalendar('houppa')" class="btn-link">Bloquer la date</button>
         </div>
 
-        <div class="amour-text">Avec tout notre amour, Mayane &amp; Avy</div>
+        <div class="souvenir-text">
+            Une pensée particulière pour nos grands-parents partis trop tôt<br>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);font-style:normal;display:inline-block;margin-top:4px;">Emile &amp; Viviane Zagdoun, Gilbert Sillam &amp; Jais Malka</span>
+        </div>
     </div>
 
     <!-- ══ RSVP ══ -->
@@ -507,7 +465,7 @@
             <label class="form-label">Un mot pour les mariés</label>
             <textarea name="Message" placeholder="Mazal Tov ! 🌸" rows="3"></textarea>
 
-            <div class="deadline-text">⏰ Répondre avant le 1er Juillet 2026</div>
+            <div class="deadline-text">Répondre avant le 1er Juillet 2026</div>
             <button type="submit" class="btn-submit">Valider ma réponse</button>
         </form>
         <div id="success-msg">Merci ! Votre réponse a bien été enregistrée. 💜</div>
@@ -518,16 +476,10 @@
 <script>
 const audio = document.getElementById("bg-music");
 const musicBtn = document.getElementById("music-toggle");
-const splash = document.getElementById('splash');
 let isPlaying = false;
 
-// ✏️ REMPLACE ICI par ton URL Google Apps Script
+// ✏️ REMPLACE ICI par ton URL Google Apps Script déployé
 const script = "LIEN_GOOGLE_SHEET_API";
-
-setTimeout(() => {
-    splash.style.opacity = '0';
-    setTimeout(() => splash.style.display = 'none', 600);
-}, 2000);
 
 function startMusic() {
     if (!isPlaying) {
