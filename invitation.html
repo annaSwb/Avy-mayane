@@ -368,9 +368,18 @@
         <img src="bas-gauche.png" alt="" class="flower-corner flower-bl">
 
         <!-- Kol Sason — texte hébreu sans nikoud pour rendu propre, avec traduction -->
-        <div class="kol-sason-block">
-            <span class="kol-sason-line">קול ששון וקול שמחה, קול חתן וקול כלה</span>
-        </div>
+        <svg class="kol-sason-arc" viewBox="0 0 400 130" xmlns="http://www.w3.org/2000/svg"
+     style="width:100%;max-width:400px;margin:0 auto 20px;display:block;">
+  <defs>
+    <path id="arcPath" d="M 20,120 Q 200,10 380,120" />
+  </defs>
+  <text font-family="Cormorant Garamond, serif" font-size="18"
+        fill="#7B5EA7" font-style="italic">
+    <textPath href="#arcPath" startOffset="50%" text-anchor="middle">
+      קוֹל שָׂשׂוֹן וְקוֹל שִׂמְחָה, קוֹל חָתָן וְקוֹל כַּלָּה
+    </textPath>
+  </text>
+</svg>
 
         <!-- Familles -->
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;width:100%;">
@@ -478,7 +487,7 @@ const musicBtn = document.getElementById("music-toggle");
 let isPlaying = false;
 
 // ✏️ REMPLACE ICI par ton URL Google Apps Script déployé
-const script = "LIEN_GOOGLE_SHEET_API";
+const script = "https://script.google.com/macros/s/AKfycbwE9YRWa0HbluP4v4XsNDdDXwEKLtQ6p0fxcVcrJtmEgz5i6Vd6hV2vJsJzzRaL-dc1ZQ/exec";
 
 function startMusic() {
     if (!isPlaying) {
