@@ -480,13 +480,23 @@ let isPlaying = false;
 // ✏️ REMPLACE ICI par ton URL Google Apps Script déployé
 const script = "https://script.google.com/macros/s/AKfycbwE9YRWa0HbluP4v4XsNDdDXwEKLtQ6p0fxcVcrJtmEgz5i6Vd6hV2vJsJzzRaL-dc1ZQ/exec";
 
-if (sessionStorage.getItem('autoplay_music') === '1') {
-    sessionStorage.removeItem('autoplay_music');
-    audio.play().then(() => {
-        musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-        isPlaying = true;
-    }).catch(() => {});
+function startMusic() {
+    if (!isPlaying) {
+        audio.play().then(() => {
+            musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            isPlaying = true;
+        }).catch(() => {});
+    }
 }
+function handleInteraction() {
+    startMusic();
+    window.removeEventListener('scroll', handleInteraction);
+    window.removeEventListener('click', handleInteraction);
+    window.removeEventListener('touchstart', handleInteraction);
+}
+window.addEventListener('scroll', handleInteraction);
+window.addEventListener('click', handleInteraction);
+window.addEventListener('touchstart', handleInteraction);
 
 function toggleMusic(e) {
     if (e) e.stopPropagation();
