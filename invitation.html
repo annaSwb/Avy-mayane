@@ -186,7 +186,6 @@
         .flower-tr { top: -35px; right: -35px; }
         .flower-bl { bottom: -35px; left: -35px; }
 
-        /* Kol Sason — rendu en lignes simples, pas en arc pour eviter les bugs */
         .kol-sason-block {
             margin: 14px auto 28px;
             text-align: center;
@@ -281,38 +280,13 @@
             font-family: 'Montserrat', sans-serif; color: var(--purple-main);
             padding: 20px; font-weight: 700; font-size: 0.82rem; letter-spacing: 1px;
         }
-
-        /* MUSIC BTN */
-        .music-btn {
-            position: fixed; bottom: 28px; right: 18px; z-index: 2000;
-            width: 50px; height: 50px; border-radius: 50%;
-            background: var(--purple-main); border: 2px solid #fff;
-            color: #fff; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(123,94,167,0.35);
-        }
     </style>
 </head>
 <body>
 
 <div id="splash"></div>
 
-<!--
-    ============================================================
-    LIENS A COMPLETER :
-    - logo.png          : logo affiché en haut de la carte mairie
-    - musique.mp3       : musique de fond
-    - fleur-gauche.png  : bordure gauche répétée (carte mairie)
-    - fleur-droite.png  : bordure droite répétée (carte mairie)
-    - haut-droite.png   : coin haut-droit fleuri (carte houppa)
-    - bas-gauche.png    : coin bas-gauche fleuri (carte houppa)
-    - LIEN_GOOGLE_SHEET_API : URL de ton Google Apps Script déployé
-    ============================================================
--->
-
 <audio id="bg-music" loop><source src="musique.mp3" type="audio/mpeg"></audio>
-<button id="music-toggle" class="music-btn" onclick="toggleMusic(event)">
-    <i class="fa-solid fa-play"></i>
-</button>
 
 <nav>
     <a href="#mairie">Mairie</a>
@@ -367,12 +341,10 @@
         <img src="haut-droite.png" alt="" class="flower-corner flower-tr">
         <img src="bas-gauche.png" alt="" class="flower-corner flower-bl">
 
-        <!-- Kol Sason — texte hébreu sans nikoud pour rendu propre, avec traduction -->
-       <div class="kol-sason-block">
+        <div class="kol-sason-block">
             <span class="kol-sason-line">קול ששון וקול שמחה, קול חתן וקול כלה</span>
         </div>
 
-        <!-- Familles -->
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;width:100%;">
             <div style="flex:1;text-align:left;">
                 <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Charly et Solange SULTAN</span>
@@ -474,42 +446,29 @@
 
 <script>
 const audio = document.getElementById("bg-music");
-const musicBtn = document.getElementById("music-toggle");
-let isPlaying = false;
 
-// ✏️ REMPLACE ICI par ton URL Google Apps Script déployé
 const script = "https://script.google.com/macros/s/AKfycbwE9YRWa0HbluP4v4XsNDdDXwEKLtQ6p0fxcVcrJtmEgz5i6Vd6hV2vJsJzzRaL-dc1ZQ/exec";
 
 function startMusic() {
-    if (!isPlaying) {
-        audio.play().then(() => {
-            musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-            isPlaying = true;
-        }).catch(() => {});
-    }
+    audio.play().catch(() => {});
 }
+
 function handleInteraction() {
     startMusic();
     window.removeEventListener('scroll', handleInteraction);
     window.removeEventListener('click', handleInteraction);
     window.removeEventListener('touchstart', handleInteraction);
 }
-window.addEventListener('scroll', handleInteraction);
-window.addEventListener('click', handleInteraction);
-window.addEventListener('touchstart', handleInteraction);
 
-function toggleMusic(e) {
-    if (e) e.stopPropagation();
-    if (isPlaying) {
-        audio.pause();
-        musicBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-        isPlaying = false;
-    } else {
-        audio.play();
-        musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-        isPlaying = true;
-    }
-}
+// Tente dès le chargement (fonctionne sur certains navigateurs desktop)
+window.addEventListener('load', () => {
+    audio.play().catch(() => {
+        // Autoplay bloqué : on attend la première interaction
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('click', handleInteraction);
+        window.addEventListener('touchstart', handleInteraction);
+    });
+});
 
 function showQty(id, visible) {
     document.getElementById(id).style.display = visible ? 'block' : 'none';
