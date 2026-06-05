@@ -334,7 +334,7 @@
             <a href="https://waze.com/ul?q=3+rue+de+la+R%C3%A9sistance+95200+Sarcelles" target="_blank" class="btn-link">GPS Waze</a>
             <button onclick="addToCalendar('mairie')" class="btn-link">Bloquer la date</button>
         </div>
-    </div>
+    </div><!-- /#mairie -->
 
     <!-- ══ HOUPPA ══ -->
     <div id="houppa" class="card">
@@ -397,8 +397,9 @@
             La cérémonie religieuse sera suivie d'une réception
         </div>
         <div class="souvenir-text">
-            Une pensée particulière pour nos grands-parents partis trop tôt<br>
-    </div>
+            Une pensée particulière pour nos grands-parents partis trop tôt
+        </div>
+    </div><!-- /#houppa -->
 
     <!-- ══ RSVP ══ -->
     <div id="rsvp" class="card">
@@ -441,9 +442,9 @@
             <button type="submit" class="btn-submit">Valider ma réponse</button>
         </form>
         <div id="success-msg">Merci ! Votre réponse a bien été enregistrée. 💜</div>
-    </div>
+    </div><!-- /#rsvp -->
 
-</div>
+</div><!-- /.main-wrapper -->
 
 <script>
 const audio = document.getElementById("bg-music");
@@ -461,10 +462,8 @@ function handleInteraction() {
     window.removeEventListener('touchstart', handleInteraction);
 }
 
-// Tente dès le chargement (fonctionne sur certains navigateurs desktop)
 window.addEventListener('load', () => {
     audio.play().catch(() => {
-        // Autoplay bloqué : on attend la première interaction
         window.addEventListener('scroll', handleInteraction);
         window.addEventListener('click', handleInteraction);
         window.addEventListener('touchstart', handleInteraction);
