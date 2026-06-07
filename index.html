@@ -263,13 +263,13 @@
         setInterval(updateTimer, 1000);
 
         document.getElementById('btnInvite').addEventListener('click', function(e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            document.getElementById('mainPage').classList.add('page-exit');
-            setTimeout(function() {
-                window.location.href = href;
-            }, 1800);
-        });
+    e.preventDefault();
+    const href = this.getAttribute('href');
+    document.getElementById('mainPage').classList.add('page-exit');
+    setTimeout(function() {
+        window.location.href = href + '?play=1';
+    }, 1800);
+});
     </script>
 </body>
 </html>
