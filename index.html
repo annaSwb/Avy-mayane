@@ -7,27 +7,39 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
             --mauve-main: #8b6fae;
             --mauve-light: #b8a8c8;
             --mauve-gradient: linear-gradient(135deg, #a088c8, #7a5fa8);
+            --purple-main: #7B5EA7;
+            --purple-light: #A98DC8;
+            --purple-pale: #EDE6F5;
+            --purple-soft: #C9B4E2;
             --bg-color: #faf8f3;
+            --bg: #FDFBFF;
+            --text-dark: #3a3040;
+            --text-mid: #6b5878;
+            --text-light: #9b86b0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-        body, html {
-            height: 100%;
-            width: 100%;
+        body {
+            font-family: 'Cormorant Garamond', serif;
             background-color: var(--bg-color);
-            font-family: 'Montserrat', sans-serif;
-            overflow: hidden;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Conteneur global avec l'animation de sortie */
+        /* ══════════════════════════════
+           PAGE D'ACCUEIL
+        ══════════════════════════════ */
         #mainPage {
             position: fixed;
             top: 0; left: 0;
@@ -39,25 +51,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: var(--bg-color);
+            z-index: 100;
         }
 
         #mainPage.page-exit {
             opacity: 0;
             transform: scale(1.2);
             filter: blur(20px);
+            pointer-events: none;
         }
 
-        /* Conteneur de la couronne florale parfaitement centré */
+        #mainPage.page-hidden {
+            display: none;
+        }
+
         .wreath-wrap {
             position: relative;
-            width: min(95vw, 600px); /* Augmenté pour un effet plus large */
+            width: min(95vw, 600px);
             display: flex;
             align-items: center;
             justify-content: center;
             animation: fadeIn 1.6s ease-out forwards;
         }
 
-        /* Image de la couronne (fleur.png) */
         .wreath-img {
             width: 100%;
             height: auto;
@@ -70,12 +87,11 @@
             50% { transform: scale(1.04); }
         }
 
-        /* Contenu centré dans l'ovale de la couronne */
         .wreath-content {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Centrage absolu */
+            transform: translate(-50%, -50%);
             width: 70%;
             text-align: center;
             z-index: 10;
@@ -84,9 +100,8 @@
             align-items: center;
         }
 
-        /* Arche Photo */
         .photo-arche {
-            width: 140px; 
+            width: 140px;
             height: 190px;
             background: #fff;
             padding: 5px;
@@ -109,19 +124,17 @@
             animation: zoomPhoto 12s ease-in-out infinite alternate;
         }
 
-        /* Noms en plus gros */
-        h1 {
+        h1.names-title {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(2.2rem, 8vw, 3.2rem); 
+            font-size: clamp(2.2rem, 8vw, 3.2rem);
             color: var(--mauve-main);
             margin-bottom: 8px;
             line-height: 1.1;
         }
 
-        /* Date en plus gros */
         .wedding-date {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem; 
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -129,7 +142,6 @@
             margin-bottom: 20px;
         }
 
-        /* Timer en plus gros */
         .timer-container {
             display: flex;
             gap: 12px;
@@ -148,14 +160,14 @@
 
         .timer-val {
             font-family: 'Cinzel', serif;
-            font-size: 1rem; 
+            font-size: 1rem;
             color: var(--mauve-main);
             font-weight: 700;
             line-height: 1;
         }
 
         .timer-label {
-            font-size: 0.45rem; 
+            font-size: 0.45rem;
             text-transform: uppercase;
             color: var(--mauve-light);
             margin-top: 5px;
@@ -163,13 +175,12 @@
             font-weight: 600;
         }
 
-        /* Bouton en plus gros */
         .btn-open {
             background: var(--mauve-gradient);
             color: #fff;
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem; 
+            font-size: 0.75rem;
             font-weight: 600;
             padding: 14px 28px;
             border-radius: 50px;
@@ -178,13 +189,12 @@
             transition: 0.3s;
             box-shadow: 0 6px 20px rgba(139, 111, 174, 0.4);
             white-space: nowrap;
+            border: none;
+            cursor: pointer;
         }
 
-        .btn-open:active {
-            transform: scale(0.95);
-        }
+        .btn-open:active { transform: scale(0.95); }
 
-        /* Animations */
         @keyframes zoomPhoto {
             0% { transform: scale(1.1); }
             100% { transform: scale(1.3); }
@@ -195,81 +205,553 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Ajustement mobile pour petits écrans */
         @media (max-width: 400px) {
             .photo-arche { width: 110px; height: 150px; }
-            h1 { font-size: 2.1rem; }
+            h1.names-title { font-size: 2.1rem; }
             .timer-val { font-size: 1.1rem; }
+        }
+
+        /* ══════════════════════════════
+           PAGE INVITATION
+        ══════════════════════════════ */
+        #invitationPage {
+            display: none;
+            opacity: 0;
+            transition: opacity 1.2s ease-in;
+        }
+
+        #invitationPage.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        nav {
+            position: sticky; top: 0; width: 100%; z-index: 1000;
+            background: rgba(253,251,255,0.97);
+            border-bottom: 1px solid var(--purple-pale);
+            padding: 14px 0;
+            display: flex; justify-content: center; gap: 30px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--purple-main);
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.62rem;
+            font-weight: 600;
+        }
+
+        .main-wrapper {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 30px 0 60px;
+            display: flex; flex-direction: column; gap: 0;
+        }
+
+        .card {
+            position: relative;
+            background: #fff;
+            text-align: center;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+            padding: 50px 40px;
+            margin: 0 10px 35px;
+            box-shadow: 0 4px 30px rgba(123,94,167,0.07);
+            border: 1px solid var(--purple-pale);
+        }
+        .card.active { opacity: 1; transform: translateY(0); }
+
+        /* MAIRIE */
+        #mairie { padding: 60px 80px; }
+        .fleur-gauche {
+            position: absolute; top: 0; left: 0;
+            width: 68px; height: 100%;
+            background-image: url('fleur-gauche.png');
+            background-repeat: repeat-y;
+            background-size: contain;
+            background-position: left top;
+            pointer-events: none;
+        }
+        .fleur-droite {
+            position: absolute; top: 0; right: 0;
+            width: 68px; height: 100%;
+            background-image: url('fleur-droite.png');
+            background-repeat: repeat-y;
+            background-size: contain;
+            background-position: right top;
+            pointer-events: none;
+        }
+
+        .rings-svg { margin: 0 auto 16px; display: block; }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            color: var(--purple-main);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .ornament {
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; margin: 14px auto;
+        }
+        .ornament-line { width: 35px; height: 1px; background: var(--purple-soft); }
+        .ornament-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--purple-soft); }
+
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            color: var(--purple-main);
+            font-size: clamp(2.4rem, 12vw, 3.8rem);
+            display: block;
+            margin: 4px 0 4px;
+            line-height: 1.2;
+        }
+        .sub-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .date-main {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.1rem, 5vw, 1.45rem);
+            font-weight: 600;
+            color: var(--purple-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+        .time-info {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .venue-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-top: 8px;
+        }
+        .venue-addr {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.92rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .btn-row { display: flex; gap: 18px; justify-content: center; margin-top: 26px; flex-wrap: wrap; }
+        .btn-link {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.62rem; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--purple-main);
+            text-decoration: none;
+            border: none; border-bottom: 1px solid var(--purple-light);
+            padding-bottom: 3px; background: none; cursor: pointer;
+        }
+
+        /* HOUPPA */
+        #houppa {
+            padding: 20px 35px 55px;
+            overflow: visible !important;
+            background: #ffffff;
+            border-color: var(--purple-pale);
+            margin-bottom: 80px !important;
+        }
+        .flower-corner {
+            position: absolute; width: 120px;
+            pointer-events: none; z-index: 10;
+        }
+        .flower-tr { top: -35px; right: -35px; }
+        .flower-bl { bottom: -35px; left: -40px; }
+
+        .kol-sason-block { margin: 14px auto 28px; text-align: center; }
+        .kol-sason-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--purple-main);
+            font-style: italic;
+            direction: rtl;
+            display: block;
+            line-height: 1.9;
+            letter-spacing: 1px;
+        }
+
+        .hebrew-row {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem; color: var(--purple-main);
+            direction: rtl; margin-bottom: 8px;
+        }
+        .hachem-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-size: 1.05rem;
+            color: var(--text-light); line-height: 1.8; margin-bottom: 6px;
+        }
+        .souvenir-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-size: 0.9rem; color: var(--text-light);
+            margin-top: 26px; padding-top: 18px;
+            border-top: 1px solid var(--purple-pale);
+            line-height: 1.8;
+        }
+
+        /* RSVP */
+        #rsvp { padding: 50px 30px; }
+        .rsvp-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem; color: var(--text-light);
+            letter-spacing: 1px; margin-bottom: 28px;
+        }
+        .form-section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.58rem; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--purple-light);
+            margin: 22px 0 8px; text-align: center;
+        }
+        .form-label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem; font-weight: 600;
+            color: var(--purple-main); text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 6px; text-align: left;
+        }
+        input[type="text"], textarea, select {
+            width: 100%; padding: 10px 0;
+            border: none; border-bottom: 1px solid var(--purple-soft);
+            background: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; color: var(--text-dark);
+            outline: none; margin-bottom: 4px;
+        }
+        input[type="text"]::placeholder, textarea::placeholder {
+            color: var(--text-light); font-style: italic;
+        }
+        textarea { resize: none; }
+        select { color: var(--text-mid); -webkit-appearance: none; cursor: pointer; }
+        .rsvp-divider { width: 100%; height: 1px; background: var(--purple-pale); margin: 18px 0; }
+        .deadline-text {
+            font-family: 'Montserrat', sans-serif; font-size: 0.63rem;
+            font-weight: 700; color: var(--purple-main);
+            text-align: center; margin-top: 22px; letter-spacing: 1px;
+        }
+        .btn-submit {
+            background: var(--purple-main); color: #fff; border: none;
+            padding: 18px; width: 100%;
+            font-family: 'Montserrat', sans-serif; text-transform: uppercase;
+            letter-spacing: 4px; font-size: 0.72rem; font-weight: 700;
+            cursor: pointer; margin-top: 18px; transition: background 0.2s;
+        }
+        .btn-submit:hover { background: var(--purple-light); }
+        #success-msg {
+            display: none; text-align: center;
+            font-family: 'Montserrat', sans-serif; color: var(--purple-main);
+            padding: 20px; font-weight: 700; font-size: 0.82rem; letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <div id="mainPage">
-        <div class="wreath-wrap">
-            <!-- Cadre Floral -->
-            <img src="fleur.png" class="wreath-img" alt="Cadre">
+<audio id="bg-music" loop><source src="musique.mp3" type="audio/mpeg"></audio>
 
-            <div class="wreath-content">
-                <!-- Photo -->
-                <div class="photo-arche">
-                    <img src="image.jpeg" alt="Mayane & Avy">
-                </div>
+<!-- ══════════════════════════════
+     PAGE D'ACCUEIL
+══════════════════════════════ -->
+<div id="mainPage">
+    <div class="wreath-wrap">
+        <img src="fleur.png" class="wreath-img" alt="Cadre">
 
-                <h1>Mayane & Avy</h1>
-                <div class="wedding-date">2 Août 2026</div>
-
-                <!-- Compte à rebours -->
-                <div class="timer-container">
-                    <div class="timer-box">
-                        <span class="timer-val" id="d">00</span>
-                        <span class="timer-label">Jours</span>
-                    </div>
-                    <div class="timer-box">
-                        <span class="timer-val" id="h">00</span>
-                        <span class="timer-label">Hrs</span>
-                    </div>
-                    <div class="timer-box">
-                        <span class="timer-val" id="m">00</span>
-                        <span class="timer-label">Min</span>
-                    </div>
-                    <div class="timer-box">
-                        <span class="timer-val" id="s">00</span>
-                        <span class="timer-label">Sec</span>
-                    </div>
-                </div>
-
-                <a href="invitation.html" class="btn-open" id="btnInvite">Voir l'invitation</a>
+        <div class="wreath-content">
+            <div class="photo-arche">
+                <img src="image.jpeg" alt="Mayane & Avy">
             </div>
+
+            <h1 class="names-title">Mayane & Avy</h1>
+            <div class="wedding-date">2 Août 2026</div>
+
+            <div class="timer-container">
+                <div class="timer-box">
+                    <span class="timer-val" id="d">00</span>
+                    <span class="timer-label">Jours</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-val" id="h">00</span>
+                    <span class="timer-label">Hrs</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-val" id="m">00</span>
+                    <span class="timer-label">Min</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-val" id="s">00</span>
+                    <span class="timer-label">Sec</span>
+                </div>
+            </div>
+
+            <button class="btn-open" id="btnInvite">Voir l'invitation</button>
         </div>
     </div>
+</div>
 
-    <script>
-        const target = new Date(2026, 7, 2, 17, 0, 0).getTime(); 
+<!-- ══════════════════════════════
+     PAGE INVITATION
+══════════════════════════════ -->
+<div id="invitationPage">
 
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = target - now;
-            
-            if (diff > 0) {
-                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('h').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-                document.getElementById('m').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-                document.getElementById('s').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-            }
+    <nav>
+        <a href="#mairie">Mairie</a>
+        <a href="#houppa">Houppa</a>
+        <a href="#rsvp">Réponses</a>
+    </nav>
+
+    <div class="main-wrapper">
+
+        <!-- MAIRIE -->
+        <div id="mairie" class="card">
+            <div class="fleur-gauche"></div>
+            <div class="fleur-droite"></div>
+
+            <img src="logo.png" alt="Logo" style="width:90px;margin-bottom:14px;display:block;margin-left:auto;margin-right:auto;">
+
+            <svg class="rings-svg" width="62" height="32" viewBox="0 0 62 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="21" cy="16" r="13" stroke="#7B5EA7" stroke-width="2.2" fill="none" opacity="0.75"/>
+                <circle cx="41" cy="16" r="13" stroke="#7B5EA7" stroke-width="2.2" fill="none" opacity="0.75"/>
+            </svg>
+
+            <div class="section-title">Cérémonie Civile</div>
+
+            <div class="ornament">
+                <div class="ornament-line"></div>
+                <div class="ornament-dot"></div>
+                <div class="ornament-line"></div>
+            </div>
+
+            <span class="couple-names">Mayane & Avy</span>
+            <div class="sub-title">se diront "Oui"</div>
+
+            <div class="ornament">
+                <div class="ornament-line"></div>
+                <div class="ornament-dot"></div>
+                <div class="ornament-line"></div>
+            </div>
+
+            <div class="date-main">Dimanche 26<br>Juillet 2026</div>
+            <div class="time-info">À 15H00</div>
+            <div class="venue-name">Mairie de Sarcelles</div>
+            <div class="venue-addr">3 rue de la Résistance, 95200 Sarcelles</div>
+
+            <div class="btn-row">
+                <a href="https://waze.com/ul?q=3+rue+de+la+R%C3%A9sistance+95200+Sarcelles" target="_blank" class="btn-link">GPS Waze</a>
+                <button onclick="addToCalendar('mairie')" class="btn-link">Bloquer la date</button>
+            </div>
+        </div>
+
+        <!-- HOUPPA -->
+        <div id="houppa" class="card">
+            <img src="haut-droite.png" alt="" class="flower-corner flower-tr">
+            <img src="bas-gauche.png" alt="" class="flower-corner flower-bl">
+
+            <div class="kol-sason-block">
+                <span class="kol-sason-line">קול ששון וקול שמחה, קול חתן וקול כלה</span>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;width:100%;">
+                <div style="flex:1;text-align:left;">
+                    <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Charly et Solange SULTAN</span>
+                    <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Pascal SULTAN</span>
+                    <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Nathalie ZAGDOUN</span>
+                </div>
+                <div style="flex:1;text-align:right;">
+                    <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Maguy SILLAM</span>
+                    <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">Patrick et Arielle MALKA</span>
+                    <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-mid);line-height:2;">&nbsp;</span>
+                </div>
+            </div>
+
+            <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--text-light);line-height:1.6;margin-bottom:20px;">
+                Ont la joie de vous faire part du mariage de leurs petits-enfants et enfants
+            </div>
+
+            <div class="ornament">
+                <div class="ornament-line"></div>
+                <div class="ornament-dot"></div>
+                <div class="ornament-line"></div>
+            </div>
+
+            <div class="section-title" style="margin-top:8px;">Cérémonie Religieuse</div>
+
+            <div class="hachem-text" style="margin-top:10px;">
+                Avec l'aide d'Hachem<br>nous vous convions à notre Houppa
+            </div>
+
+            <span class="couple-names" style="font-size:clamp(2.8rem,13vw,4.2rem);color:var(--purple-main);">Mayane &amp; Avy</span>
+            <div class="hebrew-row">אבי &amp; מעיין</div>
+
+            <div class="ornament">
+                <div class="ornament-line"></div>
+                <div class="ornament-dot"></div>
+                <div class="ornament-line"></div>
+            </div>
+
+            <div class="date-main">Dimanche 2 Août 2026</div>
+            <div class="time-info">À 17H00</div>
+            <div class="venue-name">La Vénerie — Domaine des Rois</div>
+            <div class="venue-addr">RD213, 77830 Échouboulains</div>
+
+            <div class="btn-row">
+                <a href="https://waze.com/ul?q=LA+VENERIE+RD213+77830+Echouboulains" target="_blank" class="btn-link">GPS Waze</a>
+                <button onclick="addToCalendar('houppa')" class="btn-link">Bloquer la date</button>
+            </div>
+
+            <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--text-mid);text-align:center;margin-top:28px;line-height:1.8;">
+                La cérémonie religieuse sera suivie d'une réception
+            </div>
+            <div class="souvenir-text">
+                Une pensée particulière pour nos grands-parents partis trop tôt<br>
+                Emile & Viviane Zagdoun, Gilbert Sillam & Jais Malka
+            </div>
+        </div>
+
+        <!-- RSVP -->
+        <div id="rsvp" class="card">
+            <div class="section-title">Confirmation</div>
+            <div class="rsvp-subtitle">Merci de répondre avant le 1er juillet 2026</div>
+
+            <form id="rsvpForm" method="POST">
+                <label class="form-label">Nom & Prénom</label>
+                <input type="text" name="Nom_Prenom" placeholder="Votre nom complet" required>
+
+                <div class="rsvp-divider"></div>
+                <div class="form-section-label">Mairie · 26 Juillet</div>
+                <label class="form-label">Présence à la Mairie ?</label>
+                <select name="Mairie_Presence" onchange="showQty('m_qty', this.value==='oui')">
+                    <option value="non">Non</option>
+                    <option value="oui">Oui</option>
+                </select>
+                <div id="m_qty" style="display:none;margin-top:8px;">
+                    <input type="text" name="Mairie_Adultes" placeholder="Nombre d'adultes">
+                </div>
+
+                <div class="rsvp-divider"></div>
+                <div class="form-section-label">Houppa & Soirée · 2 Août</div>
+                <label class="form-label">Présence à la Houppa ?</label>
+                <select name="Houppa_Presence" onchange="showQty('h_qty', this.value==='oui')">
+                    <option value="non">Non</option>
+                    <option value="oui">Oui</option>
+                </select>
+                <div id="h_qty" style="display:none;margin-top:8px;">
+                    <input type="text" name="Houppa_Adultes" placeholder="Nombre d'adultes">
+                </div>
+
+                <div class="rsvp-divider"></div>
+                <div class="form-section-label">Message</div>
+                <label class="form-label">Un mot pour les mariés</label>
+                <textarea name="Message" placeholder="Mazal Tov ! 🌸" rows="3"></textarea>
+
+                <div class="deadline-text">Répondre avant le 1er Juillet 2026</div>
+                <button type="submit" class="btn-submit">Valider ma réponse</button>
+            </form>
+            <div id="success-msg">Merci ! Votre réponse a bien été enregistrée. 💜</div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // ── Compte à rebours ──
+    const target = new Date(2026, 7, 2, 17, 0, 0).getTime();
+
+    function updateTimer() {
+        const diff = target - Date.now();
+        if (diff > 0) {
+            document.getElementById('d').innerText = Math.floor(diff / 86400000);
+            document.getElementById('h').innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+            document.getElementById('m').innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            document.getElementById('s').innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
         }
-        
-        updateTimer();
-        setInterval(updateTimer, 1000);
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
 
-        document.getElementById('btnInvite').addEventListener('click', function(e) {
-    e.preventDefault();
-    const href = this.getAttribute('href');
-    document.getElementById('mainPage').classList.add('page-exit');
-    setTimeout(function() {
-        window.location.href = href + '?play=1';
-    }, 1800);
-});
-    </script>
+    // ── Bouton "Voir l'invitation" → musique + transition ──
+    document.getElementById('btnInvite').addEventListener('click', function () {
+        // 1. Lancer la musique immédiatement au clic (geste utilisateur requis par les navigateurs)
+        const audio = document.getElementById('bg-music');
+        audio.play().catch(() => {});
+
+        // 2. Animer la sortie de la page d'accueil
+        const mainPage = document.getElementById('mainPage');
+        mainPage.classList.add('page-exit');
+
+        // 3. Après la transition, masquer la page d'accueil et afficher l'invitation
+        setTimeout(function () {
+            mainPage.classList.add('page-hidden');
+
+            const invPage = document.getElementById('invitationPage');
+            invPage.style.display = 'block';
+            // Petit délai pour que le display:block soit pris en compte avant la transition opacity
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    invPage.classList.add('visible');
+                });
+            });
+        }, 1800);
+    });
+
+    // ── RSVP ──
+    const script = "https://script.google.com/macros/s/AKfycbwE9YRWa0HbluP4v4XsNDdDXwEKLtQ6p0fxcVcrJtmEgz5i6Vd6hV2vJsJzzRaL-dc1ZQ/exec";
+
+    function showQty(id, visible) {
+        document.getElementById(id).style.display = visible ? 'block' : 'none';
+    }
+
+    document.getElementById('rsvpForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const btn = this.querySelector('.btn-submit');
+        btn.textContent = "Envoi en cours...";
+        btn.disabled = true;
+        fetch(script, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(this)) })
+            .then(() => {
+                this.style.display = 'none';
+                document.getElementById('success-msg').style.display = 'block';
+            })
+            .catch(() => alert("Erreur lors de l'envoi"));
+    });
+
+    // ── Calendrier ──
+    function addToCalendar(evt) {
+        const isMairie = evt === 'mairie';
+        const title    = isMairie ? 'Mariage Mayane & Avy – Cérémonie Civile' : 'Mariage Mayane & Avy – Houppa';
+        const start    = isMairie ? '20260726T130000Z' : '20260802T150000Z';
+        const end      = isMairie ? '20260726T150000Z' : '20260802T190000Z';
+        const location = isMairie
+            ? '3 rue de la Résistance, 95200 Sarcelles'
+            : 'La Vénerie – Domaine des Rois, RD213, 77830 Échouboulains';
+        const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:${start}\r\nDTEND:${end}\r\nSUMMARY:${title}\r\nLOCATION:${location}\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+        a.download = `${evt}_mariage_mayane_avy.ics`;
+        a.click();
+    }
+
+    // ── Apparition des cartes au scroll ──
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.card').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
