@@ -449,6 +449,26 @@
 
 <script>
 const audio = document.getElementById("bg-music");
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.get('play') === '1') {
+    audio.play().catch(() => {});
+}
+
+function handleInteraction() {
+    audio.play().catch(() => {});
+    window.removeEventListener('scroll', handleInteraction);
+    window.removeEventListener('click', handleInteraction);
+    window.removeEventListener('touchstart', handleInteraction);
+}
+
+window.addEventListener('load', () => {
+    if (urlParams.get('play') !== '1') {
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('click', handleInteraction);
+        window.addEventListener('touchstart', handleInteraction);
+    }
+});
 
 const script = "https://script.google.com/macros/s/AKfycbwE9YRWa0HbluP4v4XsNDdDXwEKLtQ6p0fxcVcrJtmEgz5i6Vd6hV2vJsJzzRaL-dc1ZQ/exec";
 
