@@ -450,17 +450,23 @@
 <script>
 const audio = document.getElementById("bg-music");
 
-document.getElementById('btnInvite').addEventListener('click', function(e) {
-    e.preventDefault();
-    const href = this.getAttribute('href');
-    
-    // Lance la musique au clic
+function startMusic() {
     audio.play().catch(() => {});
-    
-    document.getElementById('mainPage').classList.add('page-exit');
-    setTimeout(function() {
-        window.location.href = href;
-    }, 1800);
+}
+
+function handleInteraction() {
+    startMusic();
+    window.removeEventListener('scroll', handleInteraction);
+    window.removeEventListener('click', handleInteraction);
+    window.removeEventListener('touchstart', handleInteraction);
+}
+
+window.addEventListener('load', () => {
+    audio.play().catch(() => {
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('click', handleInteraction);
+        window.addEventListener('touchstart', handleInteraction);
+    });
 });
 
 const script = "https://script.google.com/macros/s/AKfycbwE9YRWa0HbluP4v4XsNDdDXwEKLtQ6p0fxcVcrJtmEgz5i6Vd6hV2vJsJzzRaL-dc1ZQ/exec";
